@@ -1,6 +1,6 @@
-package Basic.HW.response;
+package Basic.HW.dto.response;
 
-import Basic.HW.dto.Car;
+import Basic.HW.dto.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +16,9 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverResponse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
     private String username;
     private String password;
+    private Collection<Role> roles = new ArrayList<>();
     private Collection<CarResponse> cars=new ArrayList<>();
 }

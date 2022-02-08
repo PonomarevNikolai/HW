@@ -28,4 +28,9 @@ public class Driver {
     )
     private Collection<Car> cars=new ArrayList<>();
 
+    public Driver( String username, String password) {
+        this.id = null;
+        this.username = username;
+        this.password = password;
+    }
 }

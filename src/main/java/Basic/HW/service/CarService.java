@@ -1,16 +1,14 @@
 package Basic.HW.service;
 
-
-import Basic.HW.dto.Car;
-import Basic.HW.exception.CarNotFoundException;
-import Basic.HW.exception.DriverNotFoundException;
+import Basic.HW.dto.request.CarRequest;
+import Basic.HW.dto.response.CarResponse;
 
 import java.util.List;
 
 public interface CarService {
-    Car saveCar(Car car);
-    void addCarToDriver(Long idCar, String nameDriver) throws CarNotFoundException, DriverNotFoundException;
-    Car getCar(Long Id);
-    List<Car> getCars();
+    CarResponse saveCar(CarRequest car);
+    void addCarToDriver(Long idCar, String nameDriver);
+    CarResponse getCar(Long Id);
+    List<CarResponse> getCars();
     void deleteCar(Long id);
 }

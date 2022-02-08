@@ -1,18 +1,14 @@
-package Basic.HW.response;
+package Basic.HW.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarResponse {
-
-    private Long id;
-
+public class CarRequest {
     private String type;
     private String color;
+    private String driverName;
 }
