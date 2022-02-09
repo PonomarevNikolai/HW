@@ -22,9 +22,9 @@ import java.util.List;
 @Transactional
 @Slf4j
 public class DriverServiceImpl implements DriverService {
-    private final DriverRepo driverRepo;
-    private final RoleRepo roleRepo;
-    private final CarRepo carRepo;
+     final DriverRepo driverRepo;
+     final RoleRepo roleRepo;
+     final CarRepo carRepo;
 
 
     @Override

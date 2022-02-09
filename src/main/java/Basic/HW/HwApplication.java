@@ -21,21 +21,6 @@ public class HwApplication {
 		SpringApplication.run(HwApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner run(DriverService driverService,CarService carService){
-		return args -> {
 
-			driverService.saveRole(new Role(null,"ROLE_ADMIN"));
-			driverService.saveRole(new Role(null,"ROLE_USER"));
-
-			driverService.saveDriver(new DriverRequest( "Admin","admin"));
-			driverService.saveDriver(new DriverRequest("User", "user"));
-
-			driverService.addRoleToDriver("Admin","ROLE_ADMIN");
-			driverService.addRoleToDriver("User","ROLE_USER");
-
-			carService.saveCar(new CarRequest("Jeep","Black","Admin"));
-		};
-	}
 
 }

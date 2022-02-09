@@ -19,8 +19,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 public class CarServiceImpl implements CarService {
-    private final CarRepo carRepo;
-    private final DriverRepo driverRepo;
+     final CarRepo carRepo;
+     final DriverRepo driverRepo;
 
     @Override
     public CarResponse saveCar(CarRequest car) {

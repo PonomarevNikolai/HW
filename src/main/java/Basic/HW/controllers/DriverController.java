@@ -23,7 +23,7 @@ public class DriverController {
         return ResponseEntity.ok().body(driverService.getDrivers());
     }
     @GetMapping("/{name}")
-    public ResponseEntity<DriverResponse> getDrivers(@PathVariable @RequestBody String name){
+    public ResponseEntity<DriverResponse> getDriver(@PathVariable @RequestBody String name){
         return ResponseEntity.ok().body(driverService.getDriver(name));
     }
     @PostMapping("/save")
