@@ -13,20 +13,25 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.context.WebApplicationContext;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@SpringBootTest
+@SpringBootTest()
 @AutoConfigureMockMvc
 @Slf4j
 public class CarControllerTest {
+
     @MockBean
     CarService carService;
+
     @MockBean
     DriverService driverService;
 
+    @Autowired
+    WebApplicationContext webApplicationContext;
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,9 +50,9 @@ public class CarControllerTest {
                         .header("Content-Type", "application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());
-        driverService.saveDriver(new DriverRequest("Gim","111"));
-        log.info(driverService.getDrivers().toString() );
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/driver/drivers"))
+        driverService.saveDriver(new DriverRequest("Gim", "111"));
+        log.info("all drivers "+driverService.getDrivers().toString());
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/driver/Miky"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());
     }
