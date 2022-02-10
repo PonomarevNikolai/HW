@@ -10,12 +10,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @Slf4j
 @ControllerAdvice
-public class ExcHandler extends ResponseEntityExceptionHandler {
+public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value
             = {ServiceException.class})
     protected ResponseEntity<ErrorMessage> handleConflict(ServiceException e) {
         log.error(e.getMessage());
         TypicalError typicalError = e.getTypicalError();
-        return new ResponseEntity<>(new ErrorMessage("Ops! "+e.getMessage()), typicalError.getStatus());
+        return new ResponseEntity<>(new ErrorMessage("Ops! "+e.getMessage()+" "+typicalError.name()), typicalError.getStatus());
     }
 }
