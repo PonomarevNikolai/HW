@@ -1,65 +1,102 @@
 package Basic.HW.controllers;
 
-import Basic.HW.dto.Driver;
-import Basic.HW.dto.Form;
-import Basic.HW.dto.Role;
-import Basic.HW.dto.request.DriverRequest;
-import Basic.HW.dto.response.DriverResponse;
 import Basic.HW.service.CarService;
 import Basic.HW.service.DriverService;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.List;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-@WebMvcTest(DriverController.class)
+@SpringBootTest()
+@AutoConfigureMockMvc
+@Slf4j
 public class DriverControllerTest {
 
-    @MockBean
+    @Autowired
     CarService carService;
 
     @Autowired
-    WebApplicationContext webApplicationContext;
+    DriverService driverService;
+
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Test
-    void MockMvcShouldStart() {
-        assertNotNull(mockMvc);
-    }
-
-    @Test
-    void getDrivers() {
-    }
-
-    @Test
-    void getDriver() {
+    void getDrivers() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/driver/drivers"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("Admin"))
+                .andDo(print());
 
     }
 
     @Test
-    void saveDriver() {
+    void getDriver() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/driver/Admin"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("username").value("Admin"))
+                .andDo(print());
     }
 
     @Test
-    void saveRole() {
+    void saveDriver() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/driver/save")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"Test\",\"password\":\"Test\"}")
+                        .header("Content-Type", "application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("username").value("Test"))
+                .andDo(print());
     }
 
     @Test
-    void addRoleToDriver() {
+    void saveRole() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/driver/role/save")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":null,\"name\":\"Test\"}")
+                        .header("Content-Type", "application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("name").value("Test"))
+                .andDo(print());
     }
 
     @Test
-    void deleteDriver() {
+    void addRoleToDriver() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/driver/role/addtodriver")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "        \"driverName\": \"User\",\n" +
+                                "        \"roleName\": \"ROLE_ADMIN\"\n" +
+                                "    }")
+                        .header("Content-Type", "application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("roles.[1].name" ).value("ROLE_ADMIN"))
+                .andDo(print());
+    }
+
+    @Test
+    void deleteDriver() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/driver/save")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"Test\",\"password\":\"Test\"}")
+                        .header("Content-Type", "application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("username").value("Test"))
+                .andDo(print());
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/driver/delete")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"driverName\":\"Test\"}")
+                        .header("Content-Type", "application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(print());
+
     }
 }

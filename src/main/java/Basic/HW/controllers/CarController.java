@@ -22,7 +22,7 @@ public class CarController {
         return ResponseEntity.ok().body(carService.getCars());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<CarResponse> getCars(@PathVariable @RequestBody Long id){
+    public ResponseEntity<CarResponse> getCar(@PathVariable @RequestBody Long id){
         return ResponseEntity.ok().body(carService.getCar(id));
     }
     @PostMapping("/save")
