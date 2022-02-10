@@ -33,23 +33,23 @@ public class DriverController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Driver> saveDriver(@RequestBody DriverRequest driver) {
+    public ResponseEntity<Driver> saveDriver(@RequestBody DriverRequest driver) throws ServiceException{
         return ResponseEntity.ok().body(driverService.saveDriver(driver));
     }
 
     @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
+    public ResponseEntity<Role> saveRole(@RequestBody Role role)throws ServiceException {
         return ResponseEntity.ok().body(driverService.saveRole(role));
     }
 
     @PostMapping("/role/addtodriver")
-    public ResponseEntity<?> addRoleToDriver(@RequestBody Form form) {
+    public ResponseEntity<?> addRoleToDriver(@RequestBody Form form) throws ServiceException{
 
         return ResponseEntity.ok().body(driverService.addRoleToDriver(form.getDriverName(), form.getRoleName()));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteDriver(@RequestBody Form form) {
+    public ResponseEntity<?> deleteDriver(@RequestBody Form form) throws ServiceException{
         driverService.deleteDriver(form.getDriverName());
         return ResponseEntity.ok().body("Водитель удален");
     }
