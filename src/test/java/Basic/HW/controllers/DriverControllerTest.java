@@ -3,6 +3,7 @@ package Basic.HW.controllers;
 import Basic.HW.service.CarService;
 import Basic.HW.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -31,10 +33,7 @@ public class DriverControllerTest {
 
     @Test
     void getDrivers() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/driver/drivers"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("Admin"))
-                .andDo(print());
+        Assert.assertNotNull(driverService.getDrivers());
 
     }
 

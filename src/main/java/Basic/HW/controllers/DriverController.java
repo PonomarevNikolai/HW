@@ -1,5 +1,6 @@
 package Basic.HW.controllers;
 
+import Basic.HW.configuration.Message;
 import Basic.HW.dto.Driver;
 import Basic.HW.dto.Form;
 import Basic.HW.dto.Role;
@@ -9,20 +10,22 @@ import Basic.HW.service.DriverService;
 import Basic.HW.service.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.swing.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/driver")
 public class DriverController {
     private final DriverService driverService;
 
     @GetMapping("/drivers")
-    public ResponseEntity<List<DriverResponse>> getDrivers() {
-
-        return ResponseEntity.ok().body(driverService.getDrivers());
+    public String  getDrivers(Model model) {
+        model.addAttribute("drivers",driverService.getDrivers());
+        return "drivers";
     }
 
     @GetMapping("/{name}")
