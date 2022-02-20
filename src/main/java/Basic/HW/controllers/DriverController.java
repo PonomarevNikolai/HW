@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,8 +34,15 @@ public class DriverController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Driver> saveDriver(@RequestBody DriverRequest driver) throws ServiceException{
-        return ResponseEntity.ok().body(driverService.saveDriver(driver));
+    public String saveDriver(@ModelAttribute DriverRequest driver) throws ServiceException{
+        driverService.saveDriver(driver);
+
+        return "train";
+    }
+    @GetMapping("/save")
+    public String saveDriverGet(){
+
+        return "addDriverGet";
     }
 
     @PostMapping("/role/save")

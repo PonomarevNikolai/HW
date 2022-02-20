@@ -28,6 +28,7 @@
         </c:forEach>
     </table>
 </div>
+<a href="${pageContext.request.contextPath}/api/driver/save">Add driver</a>
 </body>
 
 </html>
