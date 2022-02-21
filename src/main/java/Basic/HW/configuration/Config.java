@@ -25,7 +25,7 @@ public class Config {
     CarService carService;
 
     @Bean
-    void addUsers() throws ServiceException {
+    void firstAddUsers() throws ServiceException {
         if (driverService.getDrivers().isEmpty()) {
             driverService.saveRole(new Role(null, "ROLE_ADMIN"));
             driverService.saveRole(new Role(null, "ROLE_USER"));
