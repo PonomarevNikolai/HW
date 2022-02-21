@@ -33,8 +33,10 @@ public class DriverController {
     }
 
     @PostMapping("/save")
-    public String saveDriver(@ModelAttribute DriverRequest driver) throws ServiceException{
+    public String saveDriver(@ModelAttribute DriverRequest driver,Model model) throws ServiceException{
         driverService.saveDriver(driver);
+        model.addAttribute("driver",driver);
+
 
         return "train";
     }

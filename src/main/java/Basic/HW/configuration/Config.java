@@ -5,6 +5,8 @@ import Basic.HW.dto.request.CarRequest;
 import Basic.HW.dto.request.DriverRequest;
 import Basic.HW.service.CarService;
 import Basic.HW.service.DriverService;
+import Basic.HW.service.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +17,16 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class Config {
-    @Bean
-    CommandLineRunner run(DriverService driverService, CarService carService) {
-        return args -> {
 
+    @Autowired
+    DriverService driverService;
+
+    @Autowired
+    CarService carService;
+
+    @Bean
+    void addUsers() throws ServiceException {
+        if (driverService.getDrivers().isEmpty()) {
             driverService.saveRole(new Role(null, "ROLE_ADMIN"));
             driverService.saveRole(new Role(null, "ROLE_USER"));
 
@@ -29,8 +37,7 @@ public class Config {
             driverService.addRoleToDriver("User", "ROLE_USER");
 
             carService.saveCar(new CarRequest("Jeep", "Black", "Admin"));
-        };
-
+        }
     }
 
 }

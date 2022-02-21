@@ -28,7 +28,12 @@
         </c:forEach>
     </table>
 </div>
+<div>
 <a href="${pageContext.request.contextPath}/api/driver/save">Add driver</a>
+</div>
+<div>
+<a href="${pageContext.request.contextPath}/">Home</a>
+</div>
 </body>
 
 </html>

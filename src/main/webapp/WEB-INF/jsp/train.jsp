@@ -12,6 +12,13 @@
 
 <body>
 <div>
+<h1  items="${driver}" var ="driver">
+Success, you add new driver:
+ <br>Name=${driver.username}
+ <br>Password=${driver.password}
+</h1>
+</div>
+<div>
   <img id="train" src="https://js.cx/clipart/train.gif">
 
 
