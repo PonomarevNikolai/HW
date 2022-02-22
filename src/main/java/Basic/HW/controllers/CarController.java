@@ -7,6 +7,7 @@ import Basic.HW.dto.response.CarResponse;
 import Basic.HW.service.CarService;
 import Basic.HW.service.ServiceException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
